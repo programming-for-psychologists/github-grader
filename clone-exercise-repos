@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# Clone exercise repos for all students in class.
+# Usage: ./clone-exercise-repos exercise-2
+
+# check the first argument
+if [ -z "$1" ]
+  then
+    echo "Must specify which exercise to clone, e.g., exercise-2"
+    exit 1
+fi
+
+exercise=$1
+mkdir ${exercise}
+
+while read username; do
+    repo=${exercise}-${username}
+    git clone https://github.com/programming-for-psychologists/${repo} ${exercise}/${repo}
+done < github-usernames.txt
